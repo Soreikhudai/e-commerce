@@ -2,10 +2,15 @@ import "./Music.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import React from "react";
+import React, { useContext } from "react";
 import { ProductsArr } from "./Data";
+import CartContext from "../../store/cart-context";
 
-const Music = () => {
+const Music = (props) => {
+  const Data = useContext(CartContext);
+  const addToCartHandler = (item) => {
+    Data.addItem({ item });
+  };
   return (
     <Container>
       <Row className="text-center mb-5 mt-2">
@@ -17,7 +22,7 @@ const Music = () => {
         <Col xs="12" md="6" className="product-grid">
           {ProductsArr.map((item, index) => {
             return (
-              <div className="product" key={index}>
+              <div className="product" key={index} id={"amount " + item.id}>
                 <h3>{item.title}</h3>
                 <div className="img-container mb-3">
                   <img
@@ -31,7 +36,12 @@ const Music = () => {
                     <p>${item.price}</p>
                   </div>
                   <div>
-                    <button className="btn-primary">ADD TO CART</button>
+                    <button
+                      className="btn-primary"
+                      onClick={() => addToCartHandler(item)}
+                    >
+                      ADD TO CART
+                    </button>
                   </div>
                 </div>
               </div>

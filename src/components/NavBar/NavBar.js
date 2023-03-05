@@ -4,12 +4,20 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
-import { cartElements } from "./CartData";
+import { useState, useContext, useEffect } from "react";
+import CartContext from "../../store/cart-context";
 
 const NavBar = () => {
+  let quantity = 0;
+  const Data = useContext(CartContext);
   const [showCart, setShowCart] = useState(false);
-  const [items, setItems] = useState(cartElements);
+  const [items, setItems] = useState(Data.items);
+  const [itemno, setItemNo] = useState(1);
+  console.log(Data);
+  useEffect(() => {
+    setItems(Data.items);
+  }, [Data.items]);
+  const getItems = () => {};
 
   const showCartHandler = () => {
     setShowCart(true);
@@ -21,7 +29,7 @@ const NavBar = () => {
     const newItems = items.filter((item, i) => i !== index);
     setItems(newItems);
   };
-
+  console.log(items);
   return (
     <>
       <Navbar
@@ -73,8 +81,9 @@ const NavBar = () => {
             >
               cart
             </Button>
+
             <span className="ml-5" style={{ color: "aqua" }}>
-              {0}
+              {items.length}
             </span>
 
             <Modal
@@ -103,18 +112,30 @@ const NavBar = () => {
                     <div className="cart" key={index}>
                       <div>
                         <img
-                          src={item.imageUrl}
-                          alt={item.title}
+                          src={item.item.imageUrl}
+                          alt={item.item.title}
                           className="my-image"
                         />
-                        {item.title}
+                        {item.item.title}
                       </div>
 
-                      <div className="price">${item.price}</div>
-                      <div>
-                        <div className="quantity">{item.quantity}</div>
+                      <div className="price">${item.item.price}</div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <input
+                          type="text"
+                          //   value={itemno}
+                          defaultValue={1}
+                          className="quantity mr-2"
+                          //   onChange={(e) => setItemNo(e.target.value)}
+                        />
                         <Button
-                          className="btn-danger mt-1"
+                          className="btn-danger"
                           onClick={() => removeHandler(index)}
                         >
                           REMOVE
@@ -132,7 +153,10 @@ const NavBar = () => {
                   Close
                 </Button>
                 <div>
-                  <h4>Total ${34.67}</h4>
+                  <h4>
+                    Total $
+                    {items.reduce((acc, curr) => acc + curr.item.price, 0)}
+                  </h4>
                 </div>
               </Modal.Footer>
             </Modal>

@@ -19,8 +19,10 @@
 }
 .cart .quantity {
   border: 1px solid aqua;
-  padding: 5px 20px;
+  padding: 5px;
   border-radius: 3px;
+  width: 56px;
+  text-align: center;
 }
 .description {
   display: flex;

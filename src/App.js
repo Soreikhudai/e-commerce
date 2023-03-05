@@ -1,21 +1,14 @@
 import Music from "./components/Main/Music";
 import Banner from "./components/Banner/Banner";
 import NavBar from "./components/NavBar/NavBar";
-import { Fragment } from "react";
-// import { useState } from "react";
-// import Cart from "./components/Cart/Cart";
+import CartProvider from "./store/CartProvider";
 const App = () => {
-  // const [cartIsShown, setCartIsShown] = useState(false);
-
-  // const showCartHandler = () => {
-  //   setCartIsShown(true);
-  // };
   return (
-    <Fragment>
+    <CartProvider>
       <NavBar />
       <Banner />
       <Music />
-    </Fragment>
+    </CartProvider>
   );
 };
 export default App;

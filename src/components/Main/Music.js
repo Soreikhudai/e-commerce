@@ -1,43 +1,48 @@
-import './Music.css'
-
-import React from 'react';
-
-const productsArr = [
-  {
-    title: 'Colors',
-    price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-  },
-  {
-    title: 'Black and white Colors',
-    price: 50,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-  },
-  {
-    title: 'Yellow and Black Colors',
-    price: 70,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-  },
-  {
-    title: 'Blue Color',
-    price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
-  }
-];
+import "./Music.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import React from "react";
+import { ProductsArr } from "./Data";
 
 const Music = () => {
   return (
-    <div className="product-grid  no-border" style={{boder: 'none'}}>
-      {productsArr.map(product => (
-        <div className="product">
-          <h3>{product.title}</h3>
-          <img className="my-image" src={product.imageUrl} alt={product.title} width={300}/>
-          <p>${product.price}</p>
-        </div>
-      ))}
-    </div>
+    <Container>
+      <Row className="text-center mb-5 mt-2">
+        <h1 style={{ fontFamily: "Metal Mania" }}>Music</h1>
+      </Row>
+      <Row className="justify-content-md-center">
+        <Col xs="0" lg="3" md="3"></Col>
+
+        <Col xs="12" md="6" className="product-grid">
+          {ProductsArr.map((item, index) => {
+            return (
+              <div className="product" key={index}>
+                <h3>{item.title}</h3>
+                <div className="img-container mb-3">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="my-image"
+                  />
+                </div>
+                <div className="cart-buttom">
+                  <div>
+                    <p>${item.price}</p>
+                  </div>
+                  <div>
+                    <button className="btn-primary">ADD TO CART</button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </Col>
+
+        <Col xs="0" lg="3" md="3"></Col>
+      </Row>
+    </Container>
   );
 };
 
 export default Music;
-

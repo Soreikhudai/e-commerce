@@ -8,16 +8,13 @@ import { useState, useContext, useEffect } from "react";
 import CartContext from "../../store/cart-context";
 
 const NavBar = () => {
-  let quantity = 0;
   const Data = useContext(CartContext);
   const [showCart, setShowCart] = useState(false);
   const [items, setItems] = useState(Data.items);
-  const [itemno, setItemNo] = useState(1);
-  console.log(Data);
+
   useEffect(() => {
     setItems(Data.items);
   }, [Data.items]);
-  const getItems = () => {};
 
   const showCartHandler = () => {
     setShowCart(true);

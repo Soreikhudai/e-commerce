@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import React, { useContext } from "react";
 import { ProductsArr } from "./Data";
-import CartContext from "../../store/cart-context";
+import CartContext from "../../Context/cart-context";
 
 const Music = (props) => {
   const Data = useContext(CartContext);

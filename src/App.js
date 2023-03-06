@@ -1,14 +1,19 @@
-import Music from "./components/Main/Music";
-import Banner from "./components/Banner/Banner";
-import NavBar from "./components/NavBar/NavBar";
-import CartProvider from "./store/CartProvider";
+import Store from "./page/Store/Store";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./page/Home/Home";
+import About from "./page/About/About";
+
 const App = () => {
   return (
-    <CartProvider>
-      <NavBar />
-      <Banner />
-      <Music />
-    </CartProvider>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 export default App;

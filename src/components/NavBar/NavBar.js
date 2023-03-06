@@ -5,7 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useState, useContext, useEffect } from "react";
-import CartContext from "../../store/cart-context";
+import CartContext from "../../Context/cart-context";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   const Data = useContext(CartContext);
@@ -26,7 +27,7 @@ const NavBar = () => {
     const newItems = items.filter((item, i) => i !== index);
     setItems(newItems);
   };
-  console.log(items);
+
   return (
     <>
       <Navbar
@@ -39,29 +40,29 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="ml-3" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto mx-auto">
-              <Nav.Link
+              <NavLink
                 className="nav-link-bold  ml-5 mr-5"
-                href="#home"
-                style={{ color: "white" }}
+                to="/"
+                style={{ color: "white", textDecoration: "none" }}
               >
                 HOME
-              </Nav.Link>
+              </NavLink>
 
-              <Nav.Link
+              <NavLink
                 className="nav-link-bold ml-5 mr-5"
-                href="#store"
-                style={{ color: "white" }}
+                to="/store"
+                style={{ color: "white", textDecoration: "none" }}
               >
                 STORE
-              </Nav.Link>
+              </NavLink>
 
-              <Nav.Link
+              <NavLink
                 className="nav-link-bold ml-5 mr-5"
-                href="#about"
-                style={{ color: "white" }}
+                to="/about"
+                style={{ color: "white", textDecoration: "none" }}
               >
                 ABOUT
-              </Nav.Link>
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
 
@@ -126,10 +127,8 @@ const NavBar = () => {
                       >
                         <input
                           type="text"
-                          //   value={itemno}
                           defaultValue={1}
                           className="quantity mr-2"
-                          //   onChange={(e) => setItemNo(e.target.value)}
                         />
                         <Button
                           className="btn-danger"

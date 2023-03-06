@@ -8,7 +8,7 @@ const Footer = () => {
       <Container
         fluid
         style={{
-          backgroundColor: "aqua",
+          backgroundColor: "#56CCF2",
           height: "7rem",
           position: "relative",
         }}

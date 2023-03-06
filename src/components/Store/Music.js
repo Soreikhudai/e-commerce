@@ -37,7 +37,7 @@ const Music = (props) => {
                   </div>
                   <div>
                     <button
-                      className="btn-primary"
+                      className="btn btn-primary"
                       onClick={() => addToCartHandler(item)}
                     >
                       ADD TO CART

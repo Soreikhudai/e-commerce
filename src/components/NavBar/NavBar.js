@@ -41,6 +41,7 @@ const NavBar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto mx-auto">
               <NavLink
+                activeclassname="active"
                 className="nav-link-bold  ml-5 mr-5"
                 to="/"
                 style={{ color: "white", textDecoration: "none" }}

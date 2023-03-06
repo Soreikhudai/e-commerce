@@ -9,6 +9,9 @@
   width: -webkit-fill-available;
   top: 34px;
 }
+.active {
+  color: yellow !important;
+}
 .cart {
   display: flex;
   flex-direction: row;

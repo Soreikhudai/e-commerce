@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import MoviesList from "./components/MoviesList";
 import "./App.css";
 
@@ -6,24 +6,14 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [retry, setRetry] = useState(false);
 
-  useEffect(() => {
-    if (retry > 0) {
-      const timer = setTimeout(() => {
-        fetchMovies();
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  });
-
-  async function fetchMovies() {
+  const showMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("https://swapi.dev/api/film/");
+      const response = await fetch("https://swapi.dev/api/films/");
       if (!response.ok) {
-        throw new Error("Something went wrong....Retrying");
+        throw new Error("Something went wrong....");
       }
       const data = await response.json();
 
@@ -36,35 +26,25 @@ const App = () => {
         };
       });
       setMovies(transformedMovies);
-      setRetry(true);
     } catch (error) {
-      if (retry < 3) {
-        setRetry(retry + 1);
-      } else {
-        setError(error.message);
-        setRetry(0);
-      }
+      setError(error.message);
     }
     setIsLoading(false);
-  }
+  }, []);
 
-  function handleCancelRetry() {
-    setRetry(false);
-  }
+  useEffect(() => {
+    showMoviesHandler();
+  }, [showMoviesHandler]);
 
   return (
     <React.Fragment>
       <section>
-        <button onClick={fetchMovies}>Fetch Movies</button>
+        <button onClick={showMoviesHandler}>Fetch Movies</button>
       </section>
       <section>
         {!isLoading && <MoviesList movies={movies} />}
-        {!isLoading && error && (
-          <div>
-            <p>{error}</p>
-            <button onClick={handleCancelRetry}>Cancel</button>
-          </div>
-        )}
+
+        {!isLoading && error && <p>{error}</p>}
         {isLoading && <p>Loading......</p>}
       </section>
     </React.Fragment>

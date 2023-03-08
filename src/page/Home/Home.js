@@ -5,13 +5,13 @@ import Section from "../../components/Home/Section";
 import NavBar from "../../components/Navbar/NavBar";
 function Home() {
   return (
-    <div>
+    <>
       <NavBar />
       <Banner />
       <MusicButton />
       <Section />
       <Footer />
-    </div>
+    </>
   );
 }
 

@@ -1,0 +1,10 @@
+Form {
+  margin: 1rem auto;
+  width: 30%;
+}
+Label {
+  font-weight: bolder;
+}
+.btn-form {
+  margin: 1rem auto;
+}

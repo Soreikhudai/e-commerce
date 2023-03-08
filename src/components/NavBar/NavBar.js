@@ -64,6 +64,14 @@ const NavBar = () => {
               >
                 ABOUT
               </NavLink>
+
+              <NavLink
+                className="nav-link-bold ml-5 mr-5"
+                to="/contactus"
+                style={{ color: "white", textDecoration: "none" }}
+              >
+                CONTACT US
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
 

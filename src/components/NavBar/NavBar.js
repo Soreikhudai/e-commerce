@@ -34,7 +34,13 @@ const NavBar = () => {
         bg="dark"
         expand="lg"
         variant="dark"
-        style={{ borderBottom: "2px solid white" }}
+        style={{
+          borderBottom: "2px solid white",
+          position: "fixed",
+          top: 0,
+          width: "100%",
+          zIndex: 1,
+        }}
       >
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="ml-3" />

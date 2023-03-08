@@ -5,8 +5,10 @@ import Col from "react-bootstrap/Col";
 import React, { useContext } from "react";
 import { ProductsArr } from "./Data";
 import CartContext from "../../Context/cart-context";
+import { useNavigate } from "react-router-dom";
 
-const Music = (props) => {
+const Music = () => {
+  const navigate = useNavigate();
   const Data = useContext(CartContext);
   const addToCartHandler = (item) => {
     Data.addItem({ item });
@@ -22,7 +24,12 @@ const Music = (props) => {
         <Col xs="12" md="6" className="product-grid">
           {ProductsArr.map((item, index) => {
             return (
-              <div className="product" key={index} id={"amount " + item.id}>
+              <div
+                className="product"
+                key={index}
+                id={"amount " + item.id}
+                onClick={() => navigate(`/store/item?id=${item.id}`)}
+              >
                 <h3>{item.title}</h3>
                 <div className="img-container mb-3">
                   <img

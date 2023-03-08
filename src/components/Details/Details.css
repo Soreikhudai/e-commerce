@@ -1,0 +1,17 @@
+.product-details {
+  /* display: flex;
+  flex-direction: row; */
+}
+.product_container {
+  display: flex;
+}
+.comments {
+  text-decoration: underline;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.star {
+  color: #ffc107; /* Change color as needed */
+}

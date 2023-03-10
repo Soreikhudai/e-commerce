@@ -1,5 +1,4 @@
 import { Container } from "react-bootstrap";
-import "./Section.css";
 import Table from "react-bootstrap/Table";
 import { TourData } from "./tourdata";
 

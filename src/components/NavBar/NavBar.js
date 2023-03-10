@@ -6,12 +6,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useState, useContext, useEffect } from "react";
 import CartContext from "../../Context/cart-context";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const Data = useContext(CartContext);
   const [showCart, setShowCart] = useState(false);
   const [items, setItems] = useState(Data.items);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setItems(Data.items);
@@ -26,6 +27,11 @@ const NavBar = () => {
   const removeHandler = (index) => {
     const newItems = items.filter((item, i) => i !== index);
     setItems(newItems);
+  };
+
+  const logoutHandler = () => {
+    Data.logout(null);
+    navigate("/auth");
   };
 
   return (
@@ -54,14 +60,15 @@ const NavBar = () => {
               >
                 HOME
               </NavLink>
-
-              <NavLink
-                className="nav-link-bold ml-5 mr-5"
-                to="/store"
-                style={{ color: "white", textDecoration: "none" }}
-              >
-                STORE
-              </NavLink>
+              {Data.isLoggedin && (
+                <NavLink
+                  className="nav-link-bold ml-5 mr-5"
+                  to="/store"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  STORE
+                </NavLink>
+              )}
 
               <NavLink
                 className="nav-link-bold ml-5 mr-5"
@@ -71,33 +78,52 @@ const NavBar = () => {
                 ABOUT
               </NavLink>
 
-              <NavLink
-                className="nav-link-bold ml-5 mr-5"
-                to="/contactus"
-                style={{ color: "white", textDecoration: "none" }}
-              >
-                CONTACT US
-              </NavLink>
+              {!Data.isLoggedin && (
+                <NavLink
+                  className="nav-link-bold ml-5 mr-5"
+                  to="/auth"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  LOG IN
+                </NavLink>
+              )}
+              {Data.isLoggedin && (
+                <NavLink
+                  className="nav-link-bold ml-5 mr-5"
+                  to="/contactus"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  CONTACT US
+                </NavLink>
+              )}
             </Nav>
           </Navbar.Collapse>
 
-          <div>
-            <Button
-              onClick={showCartHandler}
-              variant="dark"
-              style={{
-                border: "2px solid aqua",
-                padding: "2px 17px 5px 17px",
-                marginRight: "-30px",
-                borderRadius: "10px",
-              }}
-            >
-              cart
-            </Button>
-
-            <span className="ml-5" style={{ color: "aqua" }}>
-              {items.length}
-            </span>
+          <div className="corner-align">
+            {Data.isLoggedin && (
+              <Button className="btn btn-danger" onClick={logoutHandler}>
+                Logout
+              </Button>
+            )}
+            {Data.isLoggedin && (
+              <Button
+                onClick={showCartHandler}
+                variant="dark"
+                style={{
+                  border: "2px solid aqua",
+                  padding: "2px 17px 5px 17px",
+                  marginRight: "-30px",
+                  borderRadius: "10px",
+                }}
+              >
+                cart
+              </Button>
+            )}
+            {Data.isLoggedin && (
+              <span className="ml-5" style={{ color: "aqua" }}>
+                {items.length}
+              </span>
+            )}
 
             <Modal
               show={showCart} // check true or false

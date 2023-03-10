@@ -1,8 +1,10 @@
 import { Form, Button } from "react-bootstrap";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./FormToContact.css";
 
 const FormToContact = () => {
+  const navigate = useNavigate();
   const nameRef = useRef("");
   const emailRef = useRef("");
   const phoneNumberRef = useRef("");
@@ -25,14 +27,19 @@ const FormToContact = () => {
           },
         }
       );
+      if (!response.ok) {
+        throw new Error("request failed");
+      }
       const data = await response.json();
+      navigate("/store");
       console.log(data);
     } catch (error) {
-      console.log("error");
+      alert("something went wrong");
+      console.error(error);
     }
   };
   return (
-    <Form onSubmit={addToFireBase}>
+    <Form onSubmit={addToFireBase} style={{ minHeight: "70vh" }}>
       <Form.Group controlId="formName">
         <Form.Label>Name</Form.Label>
         <Form.Control type="text" placeholder="Enter name" ref={nameRef} />

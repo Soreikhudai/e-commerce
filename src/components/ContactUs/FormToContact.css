@@ -1,10 +1,10 @@
 Form {
   margin: 1rem auto;
-  width: 30%;
+  width: 20rem;
 }
 Label {
   font-weight: bolder;
 }
 .btn-form {
-  margin: 1rem auto;
+  margin-top: 1rem;
 }

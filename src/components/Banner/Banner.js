@@ -10,7 +10,7 @@ const Banner = () => {
           backgroundColor: "grey",
           height: "10rem",
           position: "realtive",
-          marginTop: "52px",
+          marginTop: "40px",
         }}
       >
         <Row>

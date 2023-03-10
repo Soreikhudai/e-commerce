@@ -1,16 +1,17 @@
+import Auth from "../../components/Auth/Auth";
 import Banner from "../../components/Banner/Banner";
-import FormToContact from "../../components/ContactUs/FormToContact";
 import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/Navbar/NavBar";
 
-const ContactUs = () => {
+const AuthPage = () => {
   return (
     <>
       <NavBar />
       <Banner />
-      <FormToContact />
+      <Auth />;
       <Footer />
     </>
   );
 };
-export default ContactUs;
+
+export default AuthPage;

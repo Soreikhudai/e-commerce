@@ -1,4 +1,5 @@
 import "./Music.css";
+import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -24,34 +25,34 @@ const Music = () => {
         <Col xs="12" md="6" className="product-grid">
           {ProductsArr.map((item, index) => {
             return (
-              <div
-                className="product"
-                key={index}
-                id={"amount " + item.id}
-                onClick={() => navigate(`/store/item?id=${item.id}`)}
-              >
-                <h3>{item.title}</h3>
-                <div className="img-container mb-3">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    className="my-image"
-                  />
-                </div>
-                <div className="cart-buttom">
-                  <div>
-                    <p>${item.price}</p>
+              <>
+                <div className="product" key={index} id={"amount " + item.id}>
+                  <h3>{item.title}</h3>
+                  <div
+                    className="img-container mb-3"
+                    onClick={() => navigate(`/store/item?id=${item.id}`)}
+                  >
+                    <img
+                      src={item.imageUrl}
+                      alt={item.title}
+                      className="my-image"
+                    />
                   </div>
-                  <div>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => addToCartHandler(item)}
-                    >
-                      ADD TO CART
-                    </button>
+                  <div className="cart-buttom">
+                    <div>
+                      <p>${item.price}</p>
+                    </div>
+                    <div>
+                      <Button
+                        className="btn btn-primary"
+                        onClick={() => addToCartHandler(item)}
+                      >
+                        ADD TO CART
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
             );
           })}
         </Col>

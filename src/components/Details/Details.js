@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { ProductsArr } from "../Store/Data";
 import CartContext from "../../Context/cart-context";
 import "./Details.css";
+import Reviews from "../Store/Reviews/Reviews";
 const Details = () => {
   const Data = useContext(CartContext);
   const [show, setShow] = useState(false);
@@ -43,9 +44,9 @@ const Details = () => {
         </Toast>
       </ToastContainer>
       <div className="products m-4">
-        {ProductsArr.filter((id) => id.id === itemID).map((item) => {
+        {ProductsArr.filter((id) => id.id === itemID).map((item, key) => {
           return (
-            <div className="product_container">
+            <div className="product_container" key={key}>
               <div>
                 <img src={item.imageUrl} alt={item.title} />
                 <div className="mt-3 buttons">
@@ -100,6 +101,7 @@ const Details = () => {
                     </div>
                   </div>
                 </div>
+                <Reviews />
               </div>
             </div>
           );

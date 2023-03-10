@@ -25,7 +25,10 @@ const App = () => {
           )}
 
           <Route path="/about" element={<About />} />
-          <Route path="/contactus" element={<ContactUs />} />
+
+          {authCtx.isLoggedin && (
+            <Route path="/contactus" element={<ContactUs />} />
+          )}
           <Route path="*" element={<AuthPage />} />
         </Routes>
       </BrowserRouter>

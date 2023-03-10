@@ -25,34 +25,32 @@ const Music = () => {
         <Col xs="12" md="6" className="product-grid">
           {ProductsArr.map((item, index) => {
             return (
-              <>
-                <div className="product" key={index} id={"amount " + item.id}>
-                  <h3>{item.title}</h3>
-                  <div
-                    className="img-container mb-3"
-                    onClick={() => navigate(`/store/item?id=${item.id}`)}
-                  >
-                    <img
-                      src={item.imageUrl}
-                      alt={item.title}
-                      className="my-image"
-                    />
+              <div className="product" key={index} id={"amount " + item.id}>
+                <h3>{item.title}</h3>
+                <div
+                  className="img-container mb-3"
+                  onClick={() => navigate(`/store/item?id=${item.id}`)}
+                >
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="my-image"
+                  />
+                </div>
+                <div className="cart-buttom">
+                  <div>
+                    <p>${item.price}</p>
                   </div>
-                  <div className="cart-buttom">
-                    <div>
-                      <p>${item.price}</p>
-                    </div>
-                    <div>
-                      <Button
-                        className="btn btn-primary"
-                        onClick={() => addToCartHandler(item)}
-                      >
-                        ADD TO CART
-                      </Button>
-                    </div>
+                  <div>
+                    <Button
+                      className="btn btn-primary"
+                      onClick={() => addToCartHandler(item)}
+                    >
+                      ADD TO CART
+                    </Button>
                   </div>
                 </div>
-              </>
+              </div>
             );
           })}
         </Col>

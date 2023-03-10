@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Button, Toast, ToastContainer } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { ProductsArr } from "../Store/Data";
 import CartContext from "../../Context/cart-context";
 import "./Details.css";
 import Reviews from "../Store/Reviews/Reviews";
 const Details = () => {
   const Data = useContext(CartContext);
+
   const [show, setShow] = useState(false);
   const [itemID, setItemID] = useState("");
   const location = useLocation();
@@ -50,12 +51,17 @@ const Details = () => {
               <div>
                 <img src={item.imageUrl} alt={item.title} />
                 <div className="mt-3 buttons">
-                  <Button
-                    className="btn btn-warning"
-                    onClick={() => addToCartHandler(item)}
-                  >
-                    Add to Cart
-                  </Button>
+                  {Data.isLoggedin ? (
+                    <Button
+                      className="btn btn-warning"
+                      onClick={() => addToCartHandler(item)}
+                    >
+                      Add to Cart
+                    </Button>
+                  ) : (
+                    <Navigate to="/auth" />
+                  )}
+
                   <Button className="btn" onClick={buyNowHandler}>
                     Buy Now
                   </Button>

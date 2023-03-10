@@ -60,16 +60,13 @@ const NavBar = () => {
               >
                 HOME
               </NavLink>
-              {Data.isLoggedin && (
-                <NavLink
-                  className="nav-link-bold ml-5 mr-5"
-                  to="/store"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  STORE
-                </NavLink>
-              )}
-
+              <NavLink
+                className="nav-link-bold ml-5 mr-5"
+                to="/store"
+                style={{ color: "white", textDecoration: "none" }}
+              >
+                STORE
+              </NavLink>
               <NavLink
                 className="nav-link-bold ml-5 mr-5"
                 to="/about"
@@ -77,7 +74,6 @@ const NavBar = () => {
               >
                 ABOUT
               </NavLink>
-
               {!Data.isLoggedin && (
                 <NavLink
                   className="nav-link-bold ml-5 mr-5"

@@ -15,20 +15,15 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          {authCtx.isLoggedin ? (
-            <>
-              <Route path="/store" element={<Store />} />
-              <Route path="/store/item/*" element={<ProductDetails />} />
-            </>
-          ) : (
-            <Route path="/auth" element={<AuthPage />} />
-          )}
+
+          <Route path="/store" element={<Store />} />
+          <Route path="/store/item/*" element={<ProductDetails />} />
+
+          {!authCtx.isLoggedin && <Route path="/auth" element={<AuthPage />} />}
 
           <Route path="/about" element={<About />} />
 
-          {authCtx.isLoggedin && (
-            <Route path="/contactus" element={<ContactUs />} />
-          )}
+          {<Route path="/contactus" element={<ContactUs />} />}
           <Route path="*" element={<AuthPage />} />
         </Routes>
       </BrowserRouter>

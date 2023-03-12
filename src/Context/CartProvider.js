@@ -1,6 +1,5 @@
 import CartContext from "./cart-context";
 import { useState } from "react";
-
 const CartProvider = (props) => {
   const initialToken = localStorage.getItem("token");
   const [token, setToken] = useState(initialToken);

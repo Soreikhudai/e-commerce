@@ -5,7 +5,9 @@ import { ProductsArr } from "../Store/Data";
 import CartContext from "../../Context/cart-context";
 import "./Details.css";
 import Reviews from "../Store/Reviews/Reviews";
+import CartOperation from "../Store/CartOperation";
 const Details = () => {
+  const { AddDelete } = CartOperation();
   const Data = useContext(CartContext);
 
   const [show, setShow] = useState(false);
@@ -23,8 +25,9 @@ const Details = () => {
     return () => {};
   }, [searchParams]);
 
-  const addToCartHandler = (item) => {
+  const addToCartHandler = async (item) => {
     Data.addItem({ item });
+    await AddDelete(item);
   };
   const buyNowHandler = () => {
     setShow(true);
@@ -41,7 +44,7 @@ const Details = () => {
             />
             <strong className="me-auto">{itemID}</strong>
           </Toast.Header>
-          <Toast.Body>Item Purchased Successfully!</Toast.Body>
+          <Toast.Body>Item purchased sucessfully</Toast.Body>
         </Toast>
       </ToastContainer>
       <div className="products m-4">

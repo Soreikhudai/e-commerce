@@ -7,22 +7,23 @@ import React, { useContext } from "react";
 import { ProductsArr } from "./Data";
 import CartContext from "../../Context/cart-context";
 import { useNavigate } from "react-router-dom";
+import CartOperation from "./CartOperation";
 
 const Music = () => {
+  const { AddDelete } = CartOperation();
   const navigate = useNavigate();
   const Data = useContext(CartContext);
-  const addToCartHandler = (item) => {
+  const addToCartHandler = async (item) => {
     Data.addItem({ item });
+    await AddDelete(item, "add");
   };
   return (
     <Container>
-      <Row className="text-center mb-5 mt-2">
+      <Row className="justify-content-center mb-5 mt-2">
         <h1 style={{ fontFamily: "Metal Mania" }}>Music</h1>
       </Row>
-      <Row className="justify-content-md-center">
-        <Col xs="0" lg="3" md="3"></Col>
-
-        <Col xs="12" md="6" className="product-grid">
+      <Row className="justify-content-center">
+        <Col xs="12" md="8" className="product-grid">
           {ProductsArr.map((item, index) => {
             return (
               <div className="product" key={index} id={"amount " + item.id}>
@@ -54,8 +55,6 @@ const Music = () => {
             );
           })}
         </Col>
-
-        <Col xs="0" lg="3" md="3"></Col>
       </Row>
     </Container>
   );

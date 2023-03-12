@@ -2,8 +2,10 @@ import { useState, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 import CartContext from "../../Context/cart-context";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Auth = () => {
+  const auth = getAuth();
   const Data = useContext(CartContext);
 
   const emailRef = useRef("");
@@ -19,46 +21,60 @@ const Auth = () => {
 
   const saveDetailsHandler = async (event) => {
     event.preventDefault();
-    const userInput = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
     setIsLoading(true);
-    let url;
-    if (isLogin) {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDFu8-Vjj_SFNU9d3lO4PE0uqF6xhYUqiU";
-    } else {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDFu8-Vjj_SFNU9d3lO4PE0uqF6xhYUqiU";
-    }
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(userInput),
-      returnSecureToken: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
+    signInWithEmailAndPassword(
+      auth,
+      emailRef.current.value,
+      passwordRef.current.value
+    )
+      .then((userCredential) => {
+        const user = userCredential.user;
+        Data.login(user.accessToken);
         setIsLoading(false);
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errorMessage = "Authentication failed";
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        Data.login(data.idToken);
         navigate("/store");
+        // Redirect to other component and pass user email
       })
-      .catch((err) => {
-        console.error(err);
-        alert(err.message);
+      .catch((error) => {
+        alert("Authentication failed");
+        console.error(error);
       });
+    //   let url;
+    //   if (isLogin) {
+    //     url =
+    //       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDFu8-Vjj_SFNU9d3lO4PE0uqF6xhYUqiU";
+    //   } else {
+    //     url =
+    //       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDFu8-Vjj_SFNU9d3lO4PE0uqF6xhYUqiU";
+    //   }
+    //   fetch(url, {
+    //     method: "POST",
+    //     body: JSON.stringify(userInput),
+    //     returnSecureToken: true,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   })
+    //     .then((res) => {
+    //       setIsLoading(false);
+    //       if (res.ok) {
+    //         return res.json();
+    //       } else {
+    //         return res.json().then((data) => {
+    //           let errorMessage = "Authentication failed";
+    //           throw new Error(errorMessage);
+    //         });
+    //       }
+    //     })
+    //     .then((data) => {
+    //       // replace with your logic
+    //       Data.login(data.idToken);
+
+    //       navigate("/store");
+    //     })
+    //     .catch((err) => {
+    //       console.error(err);
+    //       alert(err.message);
+    //     });
   };
 
   return (

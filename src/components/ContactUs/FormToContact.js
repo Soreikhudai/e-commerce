@@ -30,9 +30,8 @@ const FormToContact = () => {
       if (!response.ok) {
         throw new Error("request failed");
       }
-      const data = await response.json();
+      await response.json();
       navigate("/store");
-      console.log(data);
     } catch (error) {
       alert("something went wrong");
       console.error(error);
